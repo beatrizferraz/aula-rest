@@ -8,25 +8,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
-public class Curso {
+public class CatalogoFilme {
     
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-    private String nome;
-    private String descricao;
-    private Integer cargaHoraria;
-    private LocalDate dataInicio; 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
+    private String nome;
+    private String sinopse;
+    private LocalDate lancamento;
+    private String bannerUrl;
 }

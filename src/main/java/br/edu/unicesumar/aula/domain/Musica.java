@@ -6,25 +6,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
-public class Pessoa {
+public class Musica {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	private String nome;
-	
-	private String cpf;
-	
-	private Integer idade;
+    private String nome;
 
+    private String duracao;
 }
