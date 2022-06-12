@@ -18,6 +18,9 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,15 +57,12 @@ public class Cliente {
 	private String email;
 
 	@Size(min=6, max=12, message = "Senha deve ter entre 6 e 12 caracteres.") 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String senha;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name="cliente_id")
-	private List<Pedido> pedidos = new ArrayList<>();
-
-	// @OneToMany
-	// @JoinColumn(name="cliente_id")
-	// private List<Endereco> enderecos = new ArrayList<>();
+	private List<Endereco> enderecos = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="cliente_id")
@@ -71,5 +71,9 @@ public class Cliente {
 	@OneToMany
 	@JoinColumn(name="loja_id")
 	private List<Loja> lojasFavoritas = new ArrayList<>(); 
+
+	@OneToMany
+	@JoinColumn(name="cartao_id")
+	private List<Cartao> cartoes = new ArrayList<>();
 
 }

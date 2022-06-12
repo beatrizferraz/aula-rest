@@ -17,15 +17,15 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     public Page<Produto> findAll(Pageable pageable) {
-        return produtoRepository.findAll(pageable);
+        return this.produtoRepository.findAll(pageable);
     } 
 
     public Optional<Produto> findById(Long id) {
-        return produtoRepository.findById(id);
+        return this.produtoRepository.findById(id);
     }
 
     public Produto save(Produto novoProduto) {
-        return produtoRepository.save(novoProduto);
+        return this.produtoRepository.save(novoProduto);
     }
 
     public Optional<Produto> update(Produto produtoExistente) {

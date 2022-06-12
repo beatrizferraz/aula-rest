@@ -10,8 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,15 +30,17 @@ public class Pedido {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    //private LocalDateTime dataHora = LocalDateTime.now();
+    private LocalDateTime dataHora = LocalDateTime.now();
 
     private String status;
 
-    private double valorTotal;
+    private double valorTotal;  //total itens
 
     private double taxaEntrega;
 
     private double desconto;
+
+    private double valorFinalPedido;    //total com taxa e desconto
 
     private String tipoPagamento;
 
@@ -46,7 +48,15 @@ public class Pedido {
     @JoinColumn(name = "itemPedido_id")
     private List<ItemPedido> itemPedido = new ArrayList<>();
 
-    // @OneToOne
-    // @JoinColumn(name = "pedido_id")
-    // private Endereco enderecoEntrega = new Endereco(); 
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente = new Cliente();
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
+    private Endereco enderecoEntrega = new Endereco(); 
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cartao_id")
+    private Cartao cartao = new Cartao();
 }

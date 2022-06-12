@@ -23,7 +23,7 @@ public class ItemPedido {
 
     private int quantidade;
 
-    private double precoUnitario;
+    private double valorUnitario;
     
     private double precoTotal;
 

@@ -17,54 +17,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.unicesumar.aula.domain.Cliente;
-import br.edu.unicesumar.aula.service.ClienteService;
-import org.springframework.web.bind.annotation.PutMapping;
+import br.edu.unicesumar.aula.domain.Pedido;
+import br.edu.unicesumar.aula.service.PedidoService;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/pedido")
+public class PedidoController {
     
     @Autowired
-    private ClienteService service;
+    private PedidoService service;
 
     @GetMapping
-    public ResponseEntity<Page<Cliente>> buscarTodos(Pageable pageable) {
+    public ResponseEntity<Page<Pedido>> buscarTodos(Pageable pageable) {
         return ResponseEntity.ok(this.service.findAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscarPorId(@PathVariable(name="id") UUID id) {
-        Optional<Cliente> clienteOpt = this.service.findById(id);
+    public ResponseEntity<Pedido> buscarPorId(@PathVariable(name="id") UUID id) {
+        Optional<Pedido> pedidoOpt = this.service.findById(id);
 
-        if(clienteOpt.isPresent()) {
-            return ResponseEntity.ok(clienteOpt.get());
+        if(pedidoOpt.isPresent()) {
+            return ResponseEntity.ok(pedidoOpt.get());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> criarCliente(@Valid @RequestBody Cliente novoCliente) {
-        return ResponseEntity.ok(this.service.save(novoCliente));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizarCliente(@PathVariable(name="id") UUID id, @RequestBody Cliente clienteExistente) {
-        
-        if (!id.equals(clienteExistente.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        Optional<Cliente> clienteAtualizadoOpt = this.service.update(clienteExistente);
-
-        if (clienteAtualizadoOpt.isPresent()) {
-            return ResponseEntity.ok(clienteAtualizadoOpt.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }    
+    public ResponseEntity<Pedido> criarPedido(@Valid @RequestBody Pedido novoPedido) {
+        return ResponseEntity.ok(this.service.save(novoPedido));
     }
 
     @DeleteMapping("/{id}")
@@ -77,4 +60,11 @@ public class ClienteController {
         }    
     }
 
+    @DeleteMapping
+    public ResponseEntity<Void> excluirTudo() {
+        this.service.deleteAll();
+        return ResponseEntity.ok().build();
+    }
+
 }
+

@@ -31,6 +31,8 @@ public class Loja {
 
     private Double avaliacao;
 
+    private String imgUrl;
+
     @OneToMany
     @JoinColumn(name = "loja_id") 
     private List<Produto> produtos = new ArrayList<>();
