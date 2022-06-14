@@ -33,6 +33,8 @@ public class Loja {
 
     private String imgUrl;
 
+    private double valorMinimoPedido;
+
     @OneToMany
     @JoinColumn(name = "loja_id") 
     private List<Produto> produtos = new ArrayList<>();

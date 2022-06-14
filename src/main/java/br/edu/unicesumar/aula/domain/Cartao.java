@@ -29,19 +29,15 @@ public class Cartao {
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	private UUID id;
 
-    @NotBlank
     @JsonProperty(access = Access.WRITE_ONLY)
     private String nome;
 
-    @NotNull
     @JsonProperty(access = Access.WRITE_ONLY)
     private Long numero;
 
-    @NotNull
     @JsonProperty(access = Access.WRITE_ONLY)
     private int cvv;
     
-    @NotNull
     @JsonProperty(access = Access.WRITE_ONLY)
     private LocalDate vencimento;
 }
